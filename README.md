@@ -1,35 +1,89 @@
-# Trabajos Practicos
+# TP5: *1er Parcial*
 
-# Como regularizar y promocionar la materia.
+Este trabajo cuenta como el `primer parcial`.
+>  
+> Es un `trabajo individual` y puede usar todos los recursos a su disposición, incluyendo el material del curso y búsquedas en internet para resolver dudas. 
 
-Para regularizar la materia debera tener el 75% de asistencia.
-Para promocionar debera tener el 100% de asistencia y aprobado con 9 o 10 los parciales.
+> **Debe implementar su solución de manera individual** si comparte código con algún compañero invalida el trabajo de ambos.
 
-Para contabilizar la asistencia deberan presentar un trabajo practico por semana resolviedo los ejercios que se pinda. 
-
-Estos trabajo no contabilizaran para la nota sino solo para la asistencia. 
-
-En dos ocasiones (que seran oportunamente anunciadas) de pedira un trabajo que se consierará un particial. El mismo sera evaluado y habra una recuperacion. 
-
-Estos parciales son los que se conseraran (junto con la asistencia) para la promocion de la materia.
-
-
-> [!TIP]
->
-> **Instrucciones para la presentación del trabajo**
+> Debe ser presentado hasta las `23:59 del sábado 5 de octubre`.
 > 
-> 1. Cambiar a la rama principal (main).
-> 2. Descargar la última versión del repositorio del curso (fetch).
-> 3. Crear una nueva rama para tus cambios (new branch) (tp1-{alumno}).
-> 4. Abrir la carpeta correspondiente a tu nombre de usuario (practicos/{alumno}/tp1).
-> 5. Resolver el ejercicio que se planta
-> 6. Confirmar los cambios (commit).
-> 7. Publicar los cambios (pull)
-> 8. Realizar una solicitud de publicación (pull request).
-> 9. Revisar que el pull request esté subido (solapa pull request en GitHub).
 
-*Los cambios no aparecerán en el repositorio principal hasta que se acepte el pull request el día del vencimiento del plazo para entregar el trabajo.*
+## Enunciado
 
-> [!NOTE]
-> Fecha de entrega: 
-> - *Sabado 14 de SEPTIEMBRE hasta las 23:59hs*
+El trabajo consiste en implementar, usando programación orientada a objetos, un sistema de facturación para una empresa de venta de productos.
+
+Asociado a cada clase a implementar tiene los test correspondientes que verifican que la implementación es correcta.
+
+Ademas estos test indican la forma exacta en que debe ser implementada la clase, incluyendo los nombres de los métodos y los parámetros que deben recibir y el comportamiento esperado.
+
+
+### Requerimientos
+
+#### Productos
+
+- Los productos tienen un código único de 4 dígitos, un nombre (1 a 100 caracteres), un precio (entre 10 y 10,000), un tipo (0 a 20 caracteres) y una cantidad en existencia (entre 0 y 1000).
+- Deben mantener la cantidad de productos en existencia y calcular su valor total.
+
+#### Catálogo
+
+- El catálogo se debe leer desde un archivo de texto `catalogo.csv` que tiene el siguiente formato (incluye encabezado):
+
+```text 
+codigo,nombre,precio,tipo,cantidad
+```
+
+- Debe descontar la existencia disponible.
+- Debe agregar un producto.
+- Debe buscar un producto por código.
+- Debe poder analizar que oferta aplica a un producto
+- Debe poder grabar los cambios en el catálogo en un archivo con el mismo formato.
+- Debe poder generar un informe para ser impreso con el siguiente formato:
+
+```text
+INFORME CATALOGO 
+Cantidad de productos:   <cantidad productos>
+Cantidad de unidades:    <cantidad unidades>
+Precio promedio:       $ <precio promedio>
+Valor total:           $ <valor total>
+Tipos de productos: 
+  - <tipo>              :  <unidades>u x $ <precio promedio>
+  - ...
+Ofertas:
+  - <descripción oferta>
+  - ...
+```
+
+#### Ofertas
+
+- La empresa tiene ofertas en algunos productos. Las ofertas pueden aplicarse a productos específicos (por código) o a todos los productos de un tipo determinado.
+- Tipos de ofertas:
+  - **Descuento porcentual**: se aplica un descuento porcentual al precio del producto.
+  - **2x1**: si se compran 2 productos iguales, se cobra solo uno.
+- Las ofertas no son acumulables; si un producto es elegible para múltiples ofertas, se aplica primera registrada. 
+- Las ofertas deben determinar si son aplicables para un producto y cantidad dada.
+- Debe poder calcular el descuento aplicado a un producto.
+
+#### Clientes
+
+- Los clientes tienen un nombre, un apellido y un CUIT de 11 dígitos.
+
+#### Factura
+
+- La factura tiene un número secuencial, una fecha, un cliente y una lista de productos con la cantidad vendida de cada uno.
+- Debe calcular el total de la venta, teniendo en cuenta las ofertas aplicadas.
+- Debe generar texto para imprimir la factura con el siguiente formato:
+```text
+Factura: <numero>
+Fecha  : <fecha>
+Cliente: <nombre cliente> (<CUIT>)
+
+- <cantidad>u <nombre producto>            x $<precio> = $<subtotal>
+      <descripción oferta>                             - $<descuento>
+- ...
+
+                                             Subtotal:   $<subtotal general>
+                                             Descuentos: $<total descuentos>
+                                             -----------------------
+                                             Total:      $<total>
+```
